@@ -6,13 +6,18 @@ from cinema.models import Genre, Actor, CinemaHall, Movie, MovieSession
 class CinemaHallSerializer(serializers.ModelSerializer):
     class Meta:
         model = CinemaHall
-        fields = ["id", "name", "rows", "seats_in_row"]
+        fields = ["id", "name", "rows", "seats_in_row", "capacity"]
 
 
 class ActorSerializer(serializers.ModelSerializer):
+
+    full_name = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Actor
-        fields = ["id", "first_name", "last_name"]
+        fields = ["id", "first_name", "last_name", "full_name"]
+
+    def get_full_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}"
 
 
 class GenreSerializer(serializers.ModelSerializer):
