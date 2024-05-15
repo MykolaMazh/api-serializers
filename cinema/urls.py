@@ -19,4 +19,4 @@ router.register("movies", MovieViewSet)
 router.register("movie_sessions", MovieSessionViewSet)
 
 
-urlpatterns = [path("", include(router.urls))]
+urlpatterns = router.urls
